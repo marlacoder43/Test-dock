@@ -11,8 +11,7 @@ RUN apt-get update && apt-get install -y git && apt-get clean
 RUN git clone https://github.com/marlacoder43/telegram-echo-bot.git 
 
 # 5. Python kutubxonalarni o'rnatish (agar requirements.txt bo‘lsa)
-RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --no-cache-dir telethon
 WORKDIR /app/telegram-echo-bot
 
 # 6. Botni ishga tushurish
