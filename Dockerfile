@@ -1,20 +1,19 @@
-# 1. Rasm sifatida Python 3.9 (yoki yangi versiya) ni ishlatamiz
-FROM python:3.9
+# 1. Python 3.9 asosida image
+FROM python:3.9-slim
 
-# 2. Ishchi katalogni yaratamiz va unga o'tamiz
+# 2. Ishchi papka
 WORKDIR /app
 
-# 3. Kerakli kutubxonalarni o'rnatamiz
-RUN pip install --no-cache-dir pyrogram tgcrypto
-
-# 4. Git va boshqa zaruriy paketlarni o‘rnatamiz
+# 3. Git va kerakli paketlar
 RUN apt-get update && apt-get install -y git && apt-get clean
 
-# 5. GitHub-dan loyihani yuklab olamiz
-RUN git clone https://github.com/marlacoder43/telegram-echo-bot.git
+# 4. Loyihani GitHub'dan yuklash
+RUN git clone https://github.com/marlacoder43/telegram-echo-bot.git 
 
-# 6. Ishchi katalogni loyihaga o'zgartiramiz
+# 5. Python kutubxonalarni o'rnatish (agar requirements.txt bo‘lsa)
+RUN pip install --no-cache-dir -r requirements.txt
+
 WORKDIR /app/telegram-echo-bot
 
-# 7. Botni ishga tushiramiz
-CMD ["python", "main.py"]
+# 6. Botni ishga tushurish
+CMD ["python", "bot.py"]
